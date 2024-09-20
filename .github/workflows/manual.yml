@@ -38,6 +38,7 @@ jobs:
         key: cache-${{ github.run_id }}-${{ github.run_attempt }}
     - name: pop dist
       run: |
+        mkdir -p dist
         cd dist
         echo "hello world" > "foo.txt"
     - name: check cache
@@ -45,6 +46,7 @@ jobs:
         echo "${{ steps.cache-dist.outputs.cache-hit }}"
         
   check_dist:
+    needs: greet
     runs-on: ubuntu-latest
     steps:
     - name: check dist
