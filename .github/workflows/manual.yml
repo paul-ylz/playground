@@ -27,28 +27,30 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ inputs.name }}"
     - name: cache dist
       id: cache-dist
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: dist
         key: cache-${{ github.run_id }}-${{ github.run_attempt }}
+    - name: Send greeting
+      run: echo "Hello ${{ inputs.name }}"
     - name: pop dist
       run: |
         mkdir -p dist
         cd dist
         echo "hello world" > "foo.txt"
-    - name: check cache
-      run: |
-        echo "${{ steps.cache-dist.outputs.cache-hit }}"
         
   check_dist:
     needs: greet
     runs-on: ubuntu-latest
     steps:
+    - name: cache dist
+      id: cache-dist
+      uses: actions/cache@v4
+      with:
+        path: dist
+        key: cache-${{ github.run_id }}-${{ github.run_attempt }}
     - name: check dist
       run: |
         cd dist
