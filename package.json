@@ -2,13 +2,19 @@
   "name": "playground",
   "version": "1.0.0",
   "description": "Hello, world",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "mkdir -p dist; cp index.js dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npm publish"
   },
-  "author": "",
+  "author": "Paul Y",
   "license": "ISC",
   "publishConfig": {
-      "registry": "https://npm.pkg.github.com/@paul-ylz"
+    "registry": "https://npm.pkg.github.com/@paul-ylz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paul-ylz/playground.git"
   }
 }
